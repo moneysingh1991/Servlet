@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_location"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.company.servlet.Location"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="80dp">
+
+    <TextView
+        android:text="Cordinates"
+        android:layout_width="406dp"
+        android:layout_height="54dp"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="112dp"
+        android:id="@+id/textView_location"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
+        android:gravity="center_horizontal"
+        app:layout_constraintLeft_toLeftOf="@+id/activity_location"
+        tools:layout_constraintLeft_creator="0"
+        app:layout_constraintTop_toTopOf="@+id/activity_location"
+        android:layout_marginTop="112dp"
+        tools:layout_constraintTop_creator="0"
+        app:layout_constraintRight_toRightOf="@+id/activity_location"
+        tools:layout_constraintRight_creator="0"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+    <Button
+        android:text="Click for location"
+        android:layout_width="190dp"
+        android:layout_height="74dp"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="174dp"
+        android:id="@+id/button_location" />
+
+</android.support.constraint.ConstraintLayout>
