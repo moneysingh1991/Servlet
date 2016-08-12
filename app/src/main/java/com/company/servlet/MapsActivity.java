@@ -1,7 +1,9 @@
 package com.company.servlet;
 
+import android.content.pm.PackageManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -15,6 +17,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
 
     LatLng my_location = null;
+    String[] latlng = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +26,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
+
         mapFragment.getMapAsync(this);
+
+        Bundle bundle = getIntent().getExtras();
+
+        if(bundle.get("location").equals(null)) {
+
+        } else {
+            latlng = bundle.get("location").toString().split(",");
+        }
+
+        my_location = new LatLng(Double.parseDouble(latlng[1]), Double.parseDouble(latlng[0]));
     }
 
     public void set_cordinates(LatLng loc) {
@@ -43,14 +58,21 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+        if(my_location != null) {
 
-        my_location = sydney;
+        } else {
+            // Add a marker in Sydney and move the camera
 
-        sydney = my_location;
+            my_location = new LatLng(-34, 151);
+        }
 
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        mMap.moveCamera( CameraUpdateFactory.newLatLngZoom(my_location , 13.0f) );
+        mMap.addMarker(new MarkerOptions().position(my_location).title("your location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(my_location));
+
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        mMap.setMyLocationEnabled(true);
     }
 }

@@ -103,6 +103,8 @@ public class Coardinate extends AppCompatActivity {
 
         Intent intent = new Intent(this, MapsActivity.class);
 
+        intent.putExtra("location", location_data);
+
         startActivity(intent);
 
        /* MapsActivity m = null;
